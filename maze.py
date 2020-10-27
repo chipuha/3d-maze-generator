@@ -143,7 +143,7 @@ def maze(width, height, depth, **kwargs):
     grid2 = [[[0,0,0,0,0,0] for x in range(width)] for x in range(height)]
 
     c = 0
-    print 'running Prim\'s alg on potentially %d walls.' % (6 * height * width * depth)
+    print(('running Prim\'s alg on potentially {} walls.').format(6 * height * width * depth))
     while len(wall_list):
         w = random.choice(wall_list)
 
@@ -174,7 +174,7 @@ def maze(width, height, depth, **kwargs):
         if i[0].edge  == 5:
             if i[1] > end[1]:
                 end = i
-    print 'correct path is %d nodes long' % end[1]
+    print(('correct path is {} nodes long').format(end[1]))
     end = end[0]
     end.end = True
 
@@ -209,11 +209,13 @@ if __name__ == "__main__":
 
     args = docopt(doc)
 
-    dims = [int(args['--width'][0]),int(args['--height'][0]),int(args['--depth'][0])]
+    # dims = [int(args['--width'][0]),int(args['--height'][0]),int(args['--depth'][0])]
+    dims = [8,8,8]
 
     seed = getrandbits(64)
     random.seed(seed)
-    m = maze(*dims, unit = float(args['--node-spacing'][0]), diameter = float(args['--diameter'][0]))
+    # m = maze(*dims, unit = float(args['--node-spacing'][0]), diameter = float(args['--diameter'][0]))
+    m = maze(*dims, unit = float(1), diameter = float(.5))
 
     if args['--enable-mesh']:
         m = cube_mesh(*dims) - m
@@ -227,9 +229,10 @@ if __name__ == "__main__":
         m2 = maze(*dims, unit = float(args['--node-spacing'][0]), diameter = ind)
         m -= m2
 
-    out = ('$fn=%d;' % int(args['--resolution'][0]))+scad_render(m)
 
-    open(args['<output.scad>'],'w+').write(out)
+    out = ('$fn={};'.format(int(args['--resolution'][0])))+scad_render(m)
+    
+    open('output2.scad','w+').write(out)
 
 
 

@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+my_mazes/
 
 # C extensions
 *.so

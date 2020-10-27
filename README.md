@@ -1,5 +1,7 @@
 # 3d-maze-generator
 
+**Updated for python 3**
+
 This is a parametric model for a 3D maze.  Generates openscad which can render
 to STL.  It uses Prim's algorithm to generate the maze so it has a defined
 start.
